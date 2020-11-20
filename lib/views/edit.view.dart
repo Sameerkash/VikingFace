@@ -30,28 +30,38 @@ class _EditViewState extends State<EditView> {
     return file;
   }
 
+  List<String> filters = ["viking.png", "f1.png"];
+
   void setImageFilter(index) async {
-    filter = await getImageFileFromAssets('viking.png');
+    filter = await getImageFileFromAssets(filters[index]);
     setState(() {});
 
     print(filter);
   }
 
+  Random random = Random();
+
   Future<void> saveImage() async {
     final image1 = img.decodeImage(widget.file.readAsBytesSync());
     final image2 = img.decodeImage(filter.readAsBytesSync());
-    final mergedImage = img.Image(
-        image1.width + image2.width, max(image1.height, image2.height));
+    final mergedImage = img.Image(800, 1100);
 
-    img.copyInto(mergedImage, image1, blend: false);
-    img.copyInto(mergedImage, image2, dstX: image1.width, blend: false);
+    final img1 = img.copyResize(image1, height: 1100, width: 800);
+    // final img2intern = img.copyRotate(img1, 90);
+
+    img.copyInto(mergedImage, img1, blend: true);
+    img.copyInto(mergedImage, image2, blend: true);
+
+    // final image = img.copyRotate(mergedImage, 90);
 
     final directory = await getExternalStorageDirectory();
     final myImagePath = '${directory.path}/viking';
 
     final myImgDir = await new Directory(myImagePath).create();
 
-    final file = new File(join(myImgDir.path, "viking1.jpg"));
+    // double rand = img.crand(random);
+
+    final file = new File(join(myImgDir.path, "viking3.jpg"));
     file.writeAsBytesSync(img.encodeJpg(mergedImage));
 
     print(file);
@@ -103,21 +113,17 @@ class _EditViewState extends State<EditView> {
             height: 50,
           ),
           Container(
-            height: 450,
-            width: 350,
+            height: 550,
+            width: 400,
             child: Stack(children: [
               Image.file(widget.file),
               if (filter != null)
-                Positioned(
-                  // top: 10,
-                  left: 90,
-                  // bottom: 20,
-                  child: Container(
-                    child: Image.file(
-                      filter,
-                      height: 170,
-                      width: 180,
-                    ),
+                Container(
+                  child: Image.file(
+                    filter,
+                    height: 550,
+                    width: 400,
+                    fit: BoxFit.contain,
                   ),
                 ),
             ]),
@@ -128,7 +134,7 @@ class _EditViewState extends State<EditView> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 3,
+              itemCount: filters.length,
               itemBuilder: (_, index) {
                 return InkWell(
                   onTap: () {
@@ -137,7 +143,7 @@ class _EditViewState extends State<EditView> {
                   child: Container(
                     height: 80,
                     width: 80,
-                    child: Image.asset("assets/viking.png"),
+                    child: Image.asset("assets/${filters[index]}"),
                   ),
                 );
               },
