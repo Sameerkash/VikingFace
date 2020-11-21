@@ -1,16 +1,26 @@
-# vikings_stream
+# Vikings Face
 
-A new Flutter project.
+**A photo editing app with viking filters which you can use become a viking!**
 
-## Getting Started
+This app was build for the stream.io competetion for the Flutter Vikings event.
 
-This project is a starting point for a Flutter application.
+**Features**
 
-A few resources to get you started if this is your first Flutter project:
+[x] Viking Filters
+[x] Choose captions
+[x] Save Image to gallery
+[x] Show off your viking face with #FlutterVikings
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="./screenshots/1.jpg" alt="1"
+	 width="70" height="170" /> &nbsp;
+<img src="./screenshots/2.jpg" alt="1"
+	 width="70" height="170" /> &nbsp;
+<img src="./screenshots/3.jpg" alt="1"
+	 width="70" height="170" />
+
+<img src="./screenshots/4.jpg" alt="1"
+	 width="70" height="170" /> &nbsp;
+<img src="./screenshots/5.jpg" alt="1"
+	 width="70" height="170" />
