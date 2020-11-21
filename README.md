@@ -4,12 +4,18 @@
 
 This app was build for the stream.io competetion for the Flutter Vikings event.
 
+
+
+
+![Vikings](./assets/viking.png)  ![stream](./assets/stream.png)  
+
+
 **Features**
 
-[x] Viking Filters
-[x] Choose captions
-[x] Save Image to gallery
-[x] Show off your viking face with #FlutterVikings
+- [x] Viking Filters
+- [x] Choose captions
+- [x] Save Image to gallery
+- [x] Show off your viking face with #FlutterVikings
 
 Screenshots
 
