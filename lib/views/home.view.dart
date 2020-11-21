@@ -79,6 +79,20 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ],
             ),
+            if (image != null)
+              RaisedButton(
+                child: Icon(Icons.arrow_forward_ios),
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditView(
+                        file: image,
+                      ),
+                    ),
+                  );
+                },
+              ),
           ],
         ),
       ),

@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:image/image.dart' as img;
@@ -19,6 +21,7 @@ class EditView extends StatefulWidget {
 
 class _EditViewState extends State<EditView> {
   File filter;
+  String caption;
 
   Future<File> getImageFileFromAssets(String path) async {
     final byteData = await rootBundle.load('assets/$path');
@@ -30,7 +33,24 @@ class _EditViewState extends State<EditView> {
     return file;
   }
 
-  List<String> filters = ["viking.png", "f1.png"];
+  List<String> filters = [
+    "f1.png",
+    "f2.png",
+    "f3.png",
+    "f4.png",
+    "f5.png",
+    "f6.png",
+    "f7.png",
+    "f8.png",
+  ];
+
+  List<String> captions = [
+    "#Flutter Vikings",
+    "Plundering for Flutter Gems",
+    "I am now a Viking!!",
+    "Battle Me!!",
+    "I Love Dash!!",
+  ];
 
   void setImageFilter(index) async {
     filter = await getImageFileFromAssets(filters[index]);
@@ -52,6 +72,10 @@ class _EditViewState extends State<EditView> {
     img.copyInto(mergedImage, img1, blend: true);
     img.copyInto(mergedImage, image2, blend: true);
 
+    if (caption != null)
+      img.drawString(mergedImage, img.arial_48, 250, 1020, caption,
+          color: 0xff2196f3);
+
     // final image = img.copyRotate(mergedImage, 90);
 
     final directory = await getExternalStorageDirectory();
@@ -61,7 +85,8 @@ class _EditViewState extends State<EditView> {
 
     // double rand = img.crand(random);
 
-    final file = new File(join(myImgDir.path, "viking3.jpg"));
+    final file =
+        new File(join(myImgDir.path, "viking${random.nextDouble()}.jpg"));
     file.writeAsBytesSync(img.encodeJpg(mergedImage));
 
     print(file);
@@ -72,6 +97,7 @@ class _EditViewState extends State<EditView> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        title: Text("Choose a filter"),
         actions: [
           FlatButton(
             onPressed: () async {
@@ -110,26 +136,74 @@ class _EditViewState extends State<EditView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: 50,
+            height: 10,
           ),
           Container(
-            height: 550,
+            height: 500,
             width: 400,
-            child: Stack(children: [
-              Image.file(widget.file),
-              if (filter != null)
-                Container(
-                  child: Image.file(
-                    filter,
-                    height: 550,
-                    width: 400,
-                    fit: BoxFit.contain,
+            child: Stack(
+              children: [
+                Image.file(widget.file),
+                if (filter != null)
+                  Container(
+                    child: Image.file(
+                      filter,
+                      height: 500,
+                      width: 400,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-            ]),
+                if (caption != null)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: 45,
+                      child: AutoSizeText(
+                        caption,
+                        maxLines: 1,
+                        minFontSize: 26,
+                        maxFontSize: 28,
+                        style: GoogleFonts.josefinSans(color: Colors.blue),
+                      ),
+                    ),
+                  )
+              ],
+            ),
           ),
           SizedBox(
             height: 10,
+          ),
+          Container(
+            height: 25,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: captions.length,
+              itemBuilder: (_, index) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      caption = captions[index];
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    height: 10,
+                    color: Colors.white,
+                    child: Text(
+                      captions[index],
+                      style: GoogleFonts.josefinSans(color: Colors.blue),
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (_, __) {
+                return SizedBox(
+                  width: 5,
+                );
+              },
+            ),
           ),
           Expanded(
             child: ListView.builder(
@@ -141,8 +215,8 @@ class _EditViewState extends State<EditView> {
                     setImageFilter(index);
                   },
                   child: Container(
-                    height: 80,
-                    width: 80,
+                    height: 60,
+                    width: 60,
                     child: Image.asset("assets/${filters[index]}"),
                   ),
                 );

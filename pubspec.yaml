@@ -23,8 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_size_text: ^2.1.0
   cupertino_icons: ^1.0.0
   flushbar: ^1.10.4
+  google_fonts: ^1.1.1
   image: ^2.1.19
   image_picker: ^0.6.7+14
   path_provider: ^1.6.24
