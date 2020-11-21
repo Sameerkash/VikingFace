@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image/image.dart' as img;
 import 'package:path/path.dart';
@@ -92,7 +93,7 @@ class _EditViewState extends State<EditView> {
         new File(join(myImgDir.path, "viking${random.nextDouble()}.jpg"));
     file.writeAsBytesSync(img.encodeJpg(mergedImage));
 
-    print(file);
+    // AlbumSaver.saveToAlbum(filePath: file.path, albumName: "Viking Face");
   }
 
   @override
@@ -160,17 +161,23 @@ class _EditViewState extends State<EditView> {
               height: 10,
             ),
             Container(
-              height: 500,
-              width: 400,
+              height: ScreenUtil().setHeight(500),
+              width: ScreenUtil().setWidth(400),
               child: Stack(
                 children: [
-                  Image.file(widget.file),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.file(
+                      widget.file,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                   if (filter != null)
                     Container(
                       child: Image.file(
                         filter,
-                        height: 500,
-                        width: 400,
+                        height: ScreenUtil().setHeight(500),
+                        width: ScreenUtil().setWidth(400),
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -194,10 +201,10 @@ class _EditViewState extends State<EditView> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: ScreenUtil().setHeight(10),
             ),
             Container(
-              height: 25,
+              height: ScreenUtil().setHeight(30),
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: captions.length,
@@ -228,7 +235,7 @@ class _EditViewState extends State<EditView> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: ScreenUtil().setHeight(20),
             ),
             Align(
               alignment: Alignment.bottomCenter,

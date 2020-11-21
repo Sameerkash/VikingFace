@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'views/home.view.dart';
 
@@ -18,7 +19,16 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeView(),
+      home: LayoutBuilder(builder: (context, constrains) {
+        final size = MediaQuery.of(context).size;
+
+        ScreenUtil.init(
+          context,
+          allowFontScaling: true,
+          designSize: Size(size.width, size.height),
+        );
+        return HomeView();
+      }),
     );
   }
 }
