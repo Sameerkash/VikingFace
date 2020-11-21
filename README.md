@@ -14,13 +14,13 @@ This app was build for the stream.io competetion for the Flutter Vikings event.
 Screenshots
 
 <img src="./screenshots/1.jpg" alt="1"
-	 width="70" height="170" /> &nbsp;
+	 width="400" height="600" /> &nbsp;
 <img src="./screenshots/2.jpg" alt="1"
-	 width="70" height="170" /> &nbsp;
+	 width="400" height="600" /> &nbsp;
 <img src="./screenshots/3.jpg" alt="1"
-	 width="70" height="170" />
+	 width="400" height="600" />
 
 <img src="./screenshots/4.jpg" alt="1"
-	 width="70" height="170" /> &nbsp;
+	 width="400" height="600" /> &nbsp;
 <img src="./screenshots/5.jpg" alt="1"
-	 width="70" height="170" />
+	 width="400" height="600" />
